@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:22.04
 
 ENV TZ=Europe/Warsaw
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone 
@@ -23,12 +23,8 @@ RUN pip3 install \
   jupyter-core \
   notebook
 
-#RUN pip3 install --use-deprecated=legacy-resolver \
-#  xai
-#  aix360
 
 RUN pip3 install \
-#  lime \
   opencv-python \
   pydot \
   scipy \
@@ -38,31 +34,16 @@ RUN pip3 install \
 
 RUN pip3 install \
   pandas \
-  pandas-profiling==2.8.0 \
-  sklearn
+  pandas-profiling \
+  scikit-learn
 
-RUN pip3 install \
-#  spacy \
-#  rasa \
-#  nltk \
-#  textblob \
-  tensorflow \
-  keras \
-  scipy
-#  flask
-
-#RUN pip3 install rasa-x -i https://pypi.rasa.com/simple
-
-EXPOSE 8888
 EXPOSE 9000
 EXPOSE 5000
 EXPOSE 5050
 EXPOSE 6006
 
-#RUN python3 -m spacy download en
 RUN useradd -ms /bin/bash kprzystalski
 RUN adduser kprzystalski sudo
-
 
 USER kprzystalski
 WORKDIR /home/kprzystalski/
